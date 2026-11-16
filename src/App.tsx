@@ -14,8 +14,11 @@ function App() {
   return (
     <PrivacyProvider>
     <div className="min-h-screen bg-graphite-900 text-white">
+      <a href="#conteudo-principal" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-brand-400 focus:px-4 focus:py-3 focus:font-semibold focus:text-graphite-950">
+        Pular para o conteúdo
+      </a>
       <Navbar />
-      <main>
+      <main id="conteudo-principal">
         <Hero />
         <About />
         <Services />
