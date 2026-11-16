@@ -22,7 +22,7 @@ export default function Contact() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
             <a
-              href={`tel:+${phone.raw}`}
+              href={`tel:+55${phone.raw}`}
               className="card-surface card-hover p-6 group block"
             >
               <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-brand-400/10 border border-brand-400/20 mb-4 group-hover:bg-brand-400/20 transition-colors">
