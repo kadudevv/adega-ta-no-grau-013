@@ -39,7 +39,9 @@ export const companyData = {
       'https://www.google.com/maps/dir/?api=1&destination=Adega+T%C3%A1+no+Grau+013,+Av.+Jorge+Hagge+461,+Avia%C3%A7%C3%A3o,+Praia+Grande,+SP,+11702-390',
     viewUrl:
       'https://www.google.com/maps/search/?api=1&query=Adega+T%C3%A1+no+Grau+013,+Av.+Jorge+Hagge+461,+Praia+Grande,+SP',
-    reviewPageUrl: 'https://www.google.com/maps/place/Adega+T%C3%A1+no+Grau+013/@-24.0135337,-46.4392431,17z/data=!4m17!1m9!3m8!1s0x94ce1f005d18a55f:0x53299be2e9ce98cf!2sAdega+T%C3%A1+no+Grau+013!8m2!3d-24.0136001!4d-46.4393939!9m1!1b1!16s%2Fg%2F11nvfvmnz8!3m6!1s0x94ce1f005d18a55f:0x53299be2e9ce98cf!8m2!3d-24.0136001!4d-46.4393939!10e2!16s%2Fg%2F11nvfvmnz8',
+    // Links diretos no formato Google Maps Links (Places API): avaliações e escrever avaliação.
+    reviewsUri: 'https://www.google.com/maps/place//data=!4m4!3m3!1s0x94ce1f005d18a55f:0x53299be2e9ce98cf!9m1!1b1',
+    writeReviewUri: 'https://www.google.com/maps/place//data=!4m3!3m2!1s0x94ce1f005d18a55f:0x53299be2e9ce98cf!12e1',
   },
 
   reviews: {
