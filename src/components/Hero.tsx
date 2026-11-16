@@ -13,7 +13,7 @@ export default function Hero() {
         src="/image.png"
         alt=""
         aria-hidden="true"
-        className="logo-watermark pointer-events-none absolute right-[-10%] top-1/2 hidden w-[min(62vw,760px)] -translate-y-1/2 md:block"
+        className="logo-watermark pointer-events-none absolute right-[-4%] top-1/2 hidden w-[min(62vw,760px)] -translate-y-1/2 md:block"
       />
 
       <div
