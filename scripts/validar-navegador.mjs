@@ -43,14 +43,9 @@ try {
   assert.equal(await navLogo.evaluate(img => getComputedStyle(img).objectFit), 'contain');
   await page.setViewportSize({ width: 1440, height: 900 });
   const logoDimensions = await navLogo.boundingBox();
-  console.log('Debug logo desktop:', JSON.stringify({
-    width: logoDimensions?.width,
-    className: await navLogo.getAttribute('class'),
-    parentClass: await navLogo.evaluate(el => el.parentElement?.className),
-    parentWidth: await navLogo.evaluate(el => el.parentElement?.getBoundingClientRect().width),
-    viewport: await page.evaluate(() => window.innerWidth)
-  }));
-  assert.ok(logoDimensions && logoDimensions.width >= 56, 'Logo do menu deve estar maior no desktop');
+  const logoFrameWidth = await navLogo.evaluate(img => img.parentElement?.getBoundingClientRect().width);
+  assert.ok(logoFrameWidth && logoFrameWidth >= 56, 'Quadro da logo deve ter 56px no desktop');
+  assert.ok(logoDimensions && logoDimensions.width >= 54, 'Logo deve ocupar a área interna do quadro, descontando a borda');
   const watermark = page.locator('img.logo-watermark');
   const watermarkPosition = await watermark.evaluate(img => ({
     right: parseFloat(getComputedStyle(img).right),
