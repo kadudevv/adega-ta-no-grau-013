@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: adega-ta-no-grau-013
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    autoDeployTrigger: commit

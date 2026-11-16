@@ -1,0 +1,18 @@
+ADEGA TÁ NO GRAU 013 — ATUALIZAÇÃO PONTUAL (16/11/2026)
+
+Base utilizada: projeto original exportado do Bolt (project-bolt-sb1-j1v2ynql.zip).
+
+1. A seção "Sobre a Adega" foi mantida: texto, dois selos e quatro cartões.
+2. O terceiro cartão foi escrito "Estamos no iFood", conforme o print enviado.
+3. Acrescentada a vitrine com três fotografias reais da própria loja,
+   abaixo dos quatro cartões da seção "Sobre":
+   - Cervejas e bebidas
+   - Refrigerantes e energéticos
+   - Tabacaria
+4. Fotos exibidas inteiras, sem corte (object-contain).
+5. Adicionado aviso de disponibilidade e restrição 18+.
+6. Restante do site, inclusive a seção antiga de Produtos, foi mantido.
+
+Para executar: npm install && npm run dev
+Para gerar arquivos para publicação: npm run build
+Nenhuma alteração foi publicada automaticamente.
