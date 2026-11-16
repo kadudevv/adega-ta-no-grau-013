@@ -72,13 +72,14 @@ export default function PrivacyCenter() {
             <div className="mb-5 flex items-start justify-between gap-4">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-7 w-7 text-brand-400" aria-hidden="true" />
-                <h2 id="privacy-title" className="font-display text-xl font-bold text-white sm:text-2xl">Privacidade e cookies</h2>
+                <h2 id="privacy-title" className="font-display text-xl font-bold text-white sm:text-2xl">{view === 'terms' ? 'Termos de uso' : 'Privacidade e cookies'}</h2>
               </div>
               <button type="button" onClick={closePrivacy} className="rounded-lg p-2 text-gray-300 hover:bg-white/10" aria-label="Fechar janela de privacidade"><X className="h-5 w-5" /></button>
             </div>
             <div className="mb-6 flex flex-wrap gap-2 border-b border-white/10 pb-4">
               <button type="button" onClick={() => openPrivacy('policy')} className={'rounded-lg px-4 py-2 text-sm font-semibold ' + (view === 'policy' ? 'bg-brand-400 text-graphite-950' : 'bg-white/5 text-gray-200 hover:bg-white/10')}>Política de privacidade</button>
               <button type="button" onClick={() => openPrivacy('cookies')} className={'rounded-lg px-4 py-2 text-sm font-semibold ' + (view === 'cookies' ? 'bg-brand-400 text-graphite-950' : 'bg-white/5 text-gray-200 hover:bg-white/10')}>Preferências de cookies</button>
+              <button type="button" onClick={() => openPrivacy('terms')} className={'rounded-lg px-4 py-2 text-sm font-semibold ' + (view === 'terms' ? 'bg-brand-400 text-graphite-950' : 'bg-white/5 text-gray-200 hover:bg-white/10')}>Termos de uso</button>
             </div>
             {view === 'policy' ? (
               <div className="space-y-5 text-sm leading-7 text-gray-300">
@@ -86,7 +87,16 @@ export default function PrivacyCenter() {
                 <div><h3 className="mb-1 font-semibold text-white">Dados e finalidades</h3><p>Este site não possui formulário de cadastro nem processa pagamentos. A hospedagem no Render pode processar dados técnicos, como endereço IP, navegador e informações de requisições, para funcionamento, prevenção de abusos e segurança. Ao utilizar WhatsApp, telefone, rotas ou iFood, você passa a interagir com os respectivos serviços.</p></div>
                 <div><h3 className="mb-1 font-semibold text-white">Terceiros</h3><p>O mapa incorporado do Google só é carregado depois de sua autorização. Links externos para WhatsApp, iFood e Google Maps direcionam a plataformas com políticas próprias. As fontes do Google Fonts também podem ser solicitadas pelo navegador para apresentar este site.</p></div>
                 <div><h3 className="mb-1 font-semibold text-white">Armazenamento local e cookies</h3><p>A preferência sobre o mapa é salva no armazenamento local (localStorage) do navegador, não em um banco de dados da adega. O mapa incorporado pode usar cookies ou tecnologias semelhantes depois de autorizado. O site não implementa ferramentas próprias de publicidade comportamental ou analytics. Você pode alterar a escolha a qualquer momento pelo rodapé.</p></div>
-                <div><h3 className="mb-1 font-semibold text-white">Seus direitos e contato</h3><p>Você pode pedir informações sobre tratamentos de dados sob responsabilidade da adega e, quando aplicável, exercer direitos previstos na LGPD, como confirmação, acesso, correção ou exclusão. Entre em contato pelo telefone {companyData.phone.display}. Serviços externos possuem seus próprios canais de privacidade. Esta política deve ser revisada pela administração sempre que houver novas integrações.</p></div>
+                <div><h3 className="mb-1 font-semibold text-white">Seus direitos e contato</h3><p>Você pode pedir informações sobre tratamentos de dados sob responsabilidade da adega e, quando aplicável, exercer direitos previstos na LGPD, como confirmação, acesso, correção ou exclusão. Entre em contato pelo telefone {companyData.phone.display}. Serviços externos possuem seus próprios canais de privacidade. O visitante também pode solicitar informações sobre o uso de seus dados pelo contato informado.</p></div>
+              </div>
+            ) : view === 'terms' ? (
+              <div className="space-y-5 text-sm leading-7 text-gray-300">
+                <p>Estes termos explicam o uso do site informativo da <strong className="text-white">{companyData.name}</strong>, em Praia Grande – SP. Última atualização: 16/11/2026.</p>
+                <div><h3 className="mb-1 font-semibold text-white">Finalidade do site</h3><p>Aqui você encontra informações gerais sobre a adega, fotos do estabelecimento, localização e formas de contato. Este site não possui cadastro, carrinho nem sistema próprio de pagamento.</p></div>
+                <div><h3 className="mb-1 font-semibold text-white">Produtos, preços e disponibilidade</h3><p>As imagens são uma apresentação do espaço, não um catálogo atualizado em tempo real. Produtos, estoque, preços, horários e condições de atendimento podem mudar. Confirme as informações diretamente com o estabelecimento ou no serviço escolhido para o pedido.</p></div>
+                <div><h3 className="mb-1 font-semibold text-white">Pedidos, cancelamentos e reembolsos</h3><p>O botão do iFood abre uma plataforma externa. Para compras feitas por ela, consulte as condições de pagamento, entrega, cancelamento e reembolso apresentadas no próprio iFood. Este site não processa nem reembolsa pedidos diretamente. Para questões sobre atendimento presencial, entre em contato com a adega.</p></div>
+                <div><h3 className="mb-1 font-semibold text-white">Links e conteúdo</h3><p>WhatsApp, iFood e Google Maps possuem termos e políticas próprios. Fotografias, logotipos e outras marcas podem ter titulares de direitos distintos; o acesso a este site não autoriza sua reprodução sem a permissão aplicável.</p></div>
+                <div><h3 className="mb-1 font-semibold text-white">Contato</h3><p>Para dúvidas sobre as informações desta página, fale com a adega pelo telefone {companyData.phone.display}.</p></div>
               </div>
             ) : (
               <div className="space-y-5 text-sm leading-7 text-gray-300">
