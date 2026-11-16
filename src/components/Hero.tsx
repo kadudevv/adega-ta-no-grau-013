@@ -55,7 +55,7 @@ export default function Hero() {
           </p>
 
           <div
-            className="animate-fade-in-up mt-8 flex flex-col sm:flex-row gap-4"
+            className="animate-fade-in-up mt-8 flex flex-col sm:flex-row sm:flex-wrap gap-4"
             style={{ animationDelay: '0.3s', opacity: 0, animationFillMode: 'forwards' }}
           >
             <a

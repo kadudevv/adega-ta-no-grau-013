@@ -1,0 +1,36 @@
+name: Validação do site
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter o código
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Instalar dependências travadas
+        run: npm ci
+      - name: Verificar TypeScript
+        run: npm run typecheck
+      - name: Verificar lint
+        run: npm run lint
+      - name: Compilar para produção
+        run: npm run build
+      - name: Auditoria de dependências de produção
+        run: npm audit --omit=dev --audit-level=high
+      - name: Preparar testes de navegador
+        run: npm install --no-save --no-package-lock playwright
+      - name: Testar botões, imagens, cookies e layout no Chrome
+        run: node scripts/validar-navegador.mjs
