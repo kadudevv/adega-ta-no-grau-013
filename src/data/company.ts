@@ -65,7 +65,7 @@ export const companyData = {
     'Ambiente acolhedor e inclusivo',
   ],
 
-  legalNotice: 'Venda de bebidas alcoólicas proibida para menores de 18 anos.',
+  legalNotice: 'Venda de bebidas alcoólicas e produtos de tabaco proibida para menores de 18 anos. Beba com moderação. Se beber, não dirija.',
 
   navLinks: [
     { label: 'Início', href: '#inicio' },
