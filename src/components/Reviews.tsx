@@ -78,7 +78,7 @@ export default function Reviews() {
                         </div>
                         <div className="min-w-0">
                           <p className="font-semibold text-white">{review.author}</p>
-                          <p className="text-xs text-gray-400">{review.dateLabel} no Google</p>
+                          <p className="text-xs text-gray-400">Google Maps • {review.dateLabel}</p>
                           <div className="mt-2 flex gap-1" aria-label={`${review.rating} de 5 estrelas`}>
                             {Array.from({ length: 5 }).map((_, i) => (
                               <Star key={i} className={`h-4 w-4 ${i < review.rating ? 'fill-brand-400 text-brand-400' : 'fill-gray-700 text-gray-700'}`} aria-hidden="true" />
@@ -90,6 +90,9 @@ export default function Reviews() {
                     </li>
                   ))}
                 </ul>
+                <p className="mt-5 text-center text-xs leading-relaxed text-gray-400">
+                  Depoimentos reproduzidos dos prints de avaliações do Google Maps enviados em novembro de 2026. Datas relativas à captura e textos mantidos conforme trechos visíveis.
+                </p>
               </div>
             ) : (
               <div className="mt-8 rounded-xl border border-dashed border-white/15 bg-white/[0.02] p-6 text-center sm:p-8">
