@@ -68,7 +68,7 @@ export default function Hero() {
               Falar no WhatsApp
             </a>
             {companyData.ifoodUrl && (
-              <a href={companyData.ifoodUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+              <a href={companyData.ifoodUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#EA1D2C] px-6 py-3.5 font-semibold text-white shadow-lg shadow-red-900/20 transition-all duration-300 hover:scale-[1.02] hover:bg-[#C91525] hover:shadow-red-700/35 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                 <ShoppingBag className="h-5 w-5" aria-hidden="true" />
                 Pedir no iFood
               </a>
