@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Cookie, ShieldCheck, X } from 'lucide-react';
 import { companyData } from '@/data/company';
 import { usePrivacy } from '@/contexts/PrivacyContext';
@@ -6,10 +6,43 @@ import { usePrivacy } from '@/contexts/PrivacyContext';
 export default function PrivacyCenter() {
   const { choice, view, openPrivacy, closePrivacy, saveChoice } = usePrivacy();
   const [allowMaps, setAllowMaps] = useState(choice.allowGoogleMaps);
+  const dialogRef = useRef<HTMLElement>(null);
+  const isOpen = view !== null;
   useEffect(() => { setAllowMaps(choice.allowGoogleMaps); }, [choice.allowGoogleMaps, view]);
   useEffect(() => {
+    if (!isOpen) return;
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    dialogRef.current?.querySelector<HTMLElement>('button')?.focus();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      previousFocus?.focus();
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
     if (!view) return;
-    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') closePrivacy(); };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closePrivacy();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const focusable = Array.from(dialogRef.current?.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), input:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+      ) ?? []);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [view, closePrivacy]);
@@ -35,7 +68,7 @@ export default function PrivacyCenter() {
       )}
       {view && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/80 p-3 sm:p-6" onMouseDown={event => { if (event.target === event.currentTarget) closePrivacy(); }}>
-          <section role="dialog" aria-modal="true" aria-labelledby="privacy-title" className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/15 bg-graphite-900 p-5 shadow-2xl sm:p-8">
+          <section ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="privacy-title" className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/15 bg-graphite-900 p-5 shadow-2xl sm:p-8">
             <div className="mb-5 flex items-start justify-between gap-4">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-7 w-7 text-brand-400" aria-hidden="true" />
@@ -50,10 +83,10 @@ export default function PrivacyCenter() {
             {view === 'policy' ? (
               <div className="space-y-5 text-sm leading-7 text-gray-300">
                 <p>Esta política descreve o funcionamento do site institucional da <strong className="text-white">{companyData.name}</strong>, localizada em {companyData.address.full}, {companyData.address.city} – {companyData.address.state}. Última atualização: 16/11/2026.</p>
-                <div><h3 className="mb-1 font-semibold text-white">Dados e finalidades</h3><p>Este site não possui formulário de cadastro nem recebe pagamentos diretamente. Informações técnicas de navegação podem ser processadas pela infraestrutura de hospedagem para funcionamento e segurança. Quando você escolhe falar por WhatsApp ou telefone, usa serviços externos.</p></div>
-                <div><h3 className="mb-1 font-semibold text-white">Terceiros</h3><p>O mapa incorporado do Google só é carregado depois de sua autorização. Links para WhatsApp e Google Maps direcionam a serviços com políticas próprias. Fontes fornecidas pelo Google podem ser solicitadas durante a navegação.</p></div>
-                <div><h3 className="mb-1 font-semibold text-white">Armazenamento local e cookies</h3><p>Guardamos no seu navegador sua escolha sobre o mapa do Google. O código atual do site não contém ferramentas próprias de publicidade comportamental ou medição de visitantes. Você pode alterar sua preferência quando quiser.</p></div>
-                <div><h3 className="mb-1 font-semibold text-white">Contato</h3><p>Para dúvidas sobre dados e privacidade, contate {companyData.phone.display}. A administração deve revisar esta política ao adicionar novas integrações, cadastros ou funcionalidades.</p></div>
+                <div><h3 className="mb-1 font-semibold text-white">Dados e finalidades</h3><p>Este site não possui formulário de cadastro nem processa pagamentos. A hospedagem no Render pode processar dados técnicos, como endereço IP, navegador e informações de requisições, para funcionamento, prevenção de abusos e segurança. Ao utilizar WhatsApp, telefone, rotas ou iFood, você passa a interagir com os respectivos serviços.</p></div>
+                <div><h3 className="mb-1 font-semibold text-white">Terceiros</h3><p>O mapa incorporado do Google só é carregado depois de sua autorização. Links externos para WhatsApp, iFood e Google Maps direcionam a plataformas com políticas próprias. As fontes do Google Fonts também podem ser solicitadas pelo navegador para apresentar este site.</p></div>
+                <div><h3 className="mb-1 font-semibold text-white">Armazenamento local e cookies</h3><p>A preferência sobre o mapa é salva no armazenamento local (localStorage) do navegador, não em um banco de dados da adega. O mapa incorporado pode usar cookies ou tecnologias semelhantes depois de autorizado. O site não implementa ferramentas próprias de publicidade comportamental ou analytics. Você pode alterar a escolha a qualquer momento pelo rodapé.</p></div>
+                <div><h3 className="mb-1 font-semibold text-white">Seus direitos e contato</h3><p>Você pode pedir informações sobre tratamentos de dados sob responsabilidade da adega e, quando aplicável, exercer direitos previstos na LGPD, como confirmação, acesso, correção ou exclusão. Entre em contato pelo telefone {companyData.phone.display}. Serviços externos possuem seus próprios canais de privacidade. Esta política deve ser revisada pela administração sempre que houver novas integrações.</p></div>
               </div>
             ) : (
               <div className="space-y-5 text-sm leading-7 text-gray-300">
