@@ -30,6 +30,8 @@ jobs:
         run: npm run build
       - name: Auditoria de dependências de produção
         run: npm audit --omit=dev --audit-level=high
+      - name: Inspecionar cabecalhos HTTP do Render
+        run: node scripts/verificar-headers.mjs
       - name: Preparar testes de navegador
         run: npm install --no-save --no-package-lock playwright
       - name: Testar botões, imagens, cookies e layout no Chrome
