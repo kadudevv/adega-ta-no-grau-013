@@ -54,8 +54,16 @@ export default function Navbar() {
             onClick={handleNavClick}
             aria-label={`${companyData.name} - Início`}
           >
-            <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-graphite-950 border border-brand-400/30 group-hover:border-brand-400/70 transition-colors duration-300 overflow-hidden">
-              <img src="/image.png" alt="" className="w-full h-full object-cover" />
+            <div className="flex shrink-0 items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-graphite-950 border border-brand-400/40 group-hover:border-brand-400/70 transition-colors duration-300 overflow-hidden">
+              <img
+                src="/image.png"
+                alt=""
+                width="766"
+                height="767"
+                decoding="async"
+                className="w-full h-full object-contain"
+                style={{ filter: 'contrast(1.16) saturate(1.12)' }}
+              />
             </div>
             <span className="font-display font-bold text-sm sm:text-base md:text-lg tracking-tight whitespace-nowrap">
               <span className="sm:hidden">{companyData.shortName}</span>
