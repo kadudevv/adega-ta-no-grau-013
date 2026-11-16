@@ -55,10 +55,10 @@ try {
   const weekly = page.locator('#horarios li');
   assert.equal(await weekly.count(), 7, 'Deve haver os sete horários semanais');
   const days = await weekly.allInnerTexts();
-  assert.match(days[0], /Segunda-feira[\\s\\S]*09:00–22:00/);
-  assert.match(days[4], /Sexta-feira[\\s\\S]*09:00–00:00/);
-  assert.match(days[5], /Sábado[\\s\\S]*09:00–00:00/);
-  assert.match(days[6], /Domingo[\\s\\S]*09:00–22:00/);
+  assert.match(days[0], /Segunda-feira[\s\S]*09:00–22:00/);
+  assert.match(days[4], /Sexta-feira[\s\S]*09:00–00:00/);
+  assert.match(days[5], /Sábado[\s\S]*09:00–00:00/);
+  assert.match(days[6], /Domingo[\s\S]*09:00–22:00/);
   assert.equal(await page.locator('#horarios li').filter({ hasText: 'Hoje' }).count(), 1);
   ok('Sete horários publicados corretamente, com destaque para o dia atual');
 
