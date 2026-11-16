@@ -51,7 +51,7 @@ try {
     right: parseFloat(getComputedStyle(img).right),
     sectionWidth: img.closest('section')?.getBoundingClientRect().width || 0,
   }));
-  assert.ok(Math.abs(watermarkPosition.right + watermarkPosition.sectionWidth * 0.04) < 2, 'Logo do fundo deve estar deslocada para a esquerda (right: -4%)');
+  assert.ok(Math.abs(watermarkPosition.right - watermarkPosition.sectionWidth * 0.01) < 2, 'Logo do fundo deve ficar em right: 1%');
   await page.setViewportSize({ width: 390, height: 844 });
   ok('Logo maior e melhor contrastada; marca d’água reposicionada');
 
