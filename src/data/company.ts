@@ -23,6 +23,9 @@ export const companyData = {
     number: '99615-8547',
   },
 
+  // Adicione o link oficial da loja no iFood quando confirmado.
+  ifoodUrl: '' as string,
+
   whatsapp: {
     message: 'Olá! Encontrei a Adega Tá no Grau 013 pelo site e gostaria de obter informações.',
     url: 'https://wa.me/5513996158547?text=Ol%C3%A1%21%20Encontrei%20a%20Adega%20T%C3%A1%20no%20Grau%20013%20pelo%20site%20e%20gostaria%20de%20obter%20informa%C3%A7%C3%B5es.',

@@ -1,4 +1,4 @@
-import { MessageCircle, MapPin, Star, Wine, Sparkles } from 'lucide-react';
+import { MessageCircle, MapPin, Star, Wine, Sparkles, ShoppingBag } from 'lucide-react';
 import { companyData } from '@/data/company';
 
 export default function Hero() {
@@ -67,6 +67,12 @@ export default function Hero() {
               <MessageCircle className="w-5 h-5" />
               Falar no WhatsApp
             </a>
+            {companyData.ifoodUrl && (
+              <a href={companyData.ifoodUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                <ShoppingBag className="h-5 w-5" aria-hidden="true" />
+                Pedir no iFood
+              </a>
+            )}
             <a
               href={companyData.maps.directionsUrl}
               target="_blank"

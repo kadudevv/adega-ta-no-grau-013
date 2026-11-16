@@ -82,17 +82,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="mt-10 text-center">
-            <a
-              href={whatsapp.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-whatsapp"
-            >
-              <MessageCircle className="w-5 h-5" />
-              Falar no WhatsApp para informações gerais
-            </a>
-          </div>
+
         </div>
       </div>
     </section>
