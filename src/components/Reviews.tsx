@@ -48,16 +48,16 @@ export default function Reviews() {
                 </div>
 
                 <div className="flex w-full flex-col gap-3 sm:w-auto md:min-w-[245px]">
-                  <a href={maps.reviewPageUrl} target="_blank" rel="noopener noreferrer" className="btn-primary text-center">
+                  <a href={maps.writeReviewUri} target="_blank" rel="noopener noreferrer" className="btn-primary text-center">
                     <PenLine className="h-5 w-5" aria-hidden="true" />
                     Avaliar no Google
                   </a>
-                  <a href={maps.reviewPageUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary text-center">
+                  <a href={maps.reviewsUri} target="_blank" rel="noopener noreferrer" className="btn-secondary text-center">
                     <ExternalLink className="h-5 w-5" aria-hidden="true" />
                     Ver todas no Google
                   </a>
                   <p className="max-w-xs text-center text-xs leading-relaxed text-gray-400">
-                    Para publicar sua opinião, entre na sua conta do Google e selecione “Escrever uma avaliação” na página da adega.
+                    O Google pode solicitar login para publicar a avaliação.
                   </p>
                 </div>
               </div>
@@ -99,7 +99,7 @@ export default function Reviews() {
                   Os depoimentos em destaque serão adicionados após a confirmação de cinco avaliações reais da nossa ficha no Google.
                   Enquanto isso, você pode ler todas as opiniões diretamente no Google Maps.
                 </p>
-                <a href={maps.reviewPageUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-400 hover:underline">
+                <a href={maps.reviewsUri} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-400 hover:underline">
                   Ler comentários reais <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 </a>
               </div>
