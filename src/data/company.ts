@@ -39,6 +39,7 @@ export const companyData = {
       'https://www.google.com/maps/dir/?api=1&destination=Adega+T%C3%A1+no+Grau+013,+Av.+Jorge+Hagge+461,+Avia%C3%A7%C3%A3o,+Praia+Grande,+SP,+11702-390',
     viewUrl:
       'https://www.google.com/maps/search/?api=1&query=Adega+T%C3%A1+no+Grau+013,+Av.+Jorge+Hagge+461,+Praia+Grande,+SP',
+    reviewPageUrl: 'https://www.google.com/maps/place/Adega+T%C3%A1+no+Grau+013/@-24.0135337,-46.4392431,17z/data=!4m17!1m9!3m8!1s0x94ce1f005d18a55f:0x53299be2e9ce98cf!2sAdega+T%C3%A1+no+Grau+013!8m2!3d-24.0136001!4d-46.4393939!9m1!1b1!16s%2Fg%2F11nvfvmnz8!3m6!1s0x94ce1f005d18a55f:0x53299be2e9ce98cf!8m2!3d-24.0136001!4d-46.4393939!10e2!16s%2Fg%2F11nvfvmnz8',
   },
 
   reviews: {
@@ -49,8 +50,18 @@ export const companyData = {
   },
 
   hours: {
-    note: 'Consulte nossos horários de funcionamento',
-    closingTime: '00h00',
+    note: 'Horários de funcionamento',
+    timezone: 'America/Sao_Paulo',
+    weekly: [
+      { key: 'Mon', label: 'Segunda-feira', start: '09:00', end: '22:00' },
+      { key: 'Tue', label: 'Terça-feira', start: '09:00', end: '22:00' },
+      { key: 'Wed', label: 'Quarta-feira', start: '09:00', end: '22:00' },
+      { key: 'Thu', label: 'Quinta-feira', start: '09:00', end: '22:00' },
+      { key: 'Fri', label: 'Sexta-feira', start: '09:00', end: '00:00' },
+      { key: 'Sat', label: 'Sábado', start: '09:00', end: '00:00' },
+      { key: 'Sun', label: 'Domingo', start: '09:00', end: '22:00' },
+    ],
+    specialNotice: 'Os horários podem ser diferentes em feriados e datas especiais. Consulte a loja antes da visita.',
   },
 
   features: {

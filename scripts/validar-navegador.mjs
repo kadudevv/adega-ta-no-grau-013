@@ -52,6 +52,25 @@ try {
   assert.ok(phoneLinks.every(href => href === 'tel:+5513996158547'), 'Todos os links de telefone devem usar o DDI +55');
   ok('WhatsApp, GPS e links de telefone com DDI brasileiro');
 
+  const weekly = page.locator('#horarios li');
+  assert.equal(await weekly.count(), 7, 'Deve haver os sete horários semanais');
+  const days = await weekly.allInnerTexts();
+  assert.match(days[0], /Segunda-feira[\s\S]*09:00–22:00/);
+  assert.match(days[4], /Sexta-feira[\s\S]*09:00–00:00/);
+  assert.match(days[5], /Sábado[\s\S]*09:00–00:00/);
+  assert.match(days[6], /Domingo[\s\S]*09:00–22:00/);
+  assert.equal(await page.locator('#horarios li').filter({ hasText: 'Hoje' }).count(), 1);
+  ok('Sete horários publicados corretamente, com destaque para o dia atual');
+
+  const reviewButtons = page.getByRole('link', { name: 'Avaliar no Google' });
+  assert.equal(await reviewButtons.count(), 1);
+  const reviewUrl = await reviewButtons.getAttribute('href');
+  assert.ok(reviewUrl?.startsWith('https://www.google.com/maps/place/Adega+T%C3%A1+no+Grau+013/'));
+  assert.equal(await reviewButtons.getAttribute('target'), '_blank');
+  assert.equal(await page.getByRole('link', { name: 'Ver todas no Google' }).getAttribute('href'), reviewUrl);
+  assert.equal(await page.locator('#avaliacoes li').count(), 0, 'Não publicar avaliações não verificadas');
+  ok('Acesso à ficha da adega no Google e nenhum comentário fictício');
+
   assert.equal(await page.getByRole('link', { name: 'Pular para o conteúdo' }).getAttribute('href'), '#conteudo-principal');
   const brokenIds = await page.locator('a[href^="#"]').evaluateAll(nodes => nodes.map(a => a.getAttribute('href')).filter(
     href => href && href.length > 1 && !document.getElementById(decodeURIComponent(href.substring(1)))
