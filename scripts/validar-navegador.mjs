@@ -51,6 +51,8 @@ try {
   assert.ok(phoneLinks.length >= 2, 'O telefone deve aparecer na seção contato e no rodapé');
   assert.ok(phoneLinks.every(href => href === 'tel:+5513996158547'), 'Todos os links de telefone devem usar o DDI +55');
   ok('WhatsApp, GPS e links de telefone com DDI brasileiro');
+  assert.equal(await page.getByText('CNPJ: 68.689.649/0001-03').count(), 1, 'CNPJ deve aparecer no rodapé');
+  ok('CNPJ da adega exibido no rodapé');
 
   const weekly = page.locator('#horarios li');
   assert.equal(await weekly.count(), 7, 'Deve haver os sete horários semanais');

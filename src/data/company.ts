@@ -5,6 +5,7 @@ export const companyData = {
   city: 'Praia Grande',
   state: 'SP',
   neighborhood: 'Aviação',
+  cnpj: '68.689.649/0001-03',
 
   address: {
     street: 'Av. Jorge Hagge',
