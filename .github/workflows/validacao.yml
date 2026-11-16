@@ -30,4 +30,7 @@ jobs:
         run: npm run build
       - name: Auditoria de dependências de produção
         run: npm audit --omit=dev --audit-level=high
-        continue-on-error: true
+      - name: Preparar testes de navegador
+        run: npm install --no-save --no-package-lock playwright
+      - name: Testar botões, imagens, cookies e layout no Chrome
+        run: node scripts/validar-navegador.mjs
