@@ -23,8 +23,8 @@ export const companyData = {
     number: '99615-8547',
   },
 
-  // Adicione o link oficial da loja no iFood quando confirmado.
-  ifoodUrl: '' as string,
+  // Link da ficha da adega no iFood informado pelo responsável.
+  ifoodUrl: 'https://www.ifood.com.br/delivery/praia-grande-sp/adega-ta-no-grau-013-aviacao/ff6c8969-7512-41d2-b197-144765c8fc48',
 
   whatsapp: {
     message: 'Olá! Encontrei a Adega Tá no Grau 013 pelo site e gostaria de obter informações.',
