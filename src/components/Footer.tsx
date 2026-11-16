@@ -5,7 +5,7 @@ import { usePrivacy } from '@/contexts/PrivacyContext';
 export default function Footer() {
   const { openPrivacy } = usePrivacy();
   const currentYear = new Date().getFullYear();
-  const { address, phone, navLinks, legalNotice, name } = companyData;
+  const { address, phone, navLinks, legalNotice, name, cnpj } = companyData;
 
   return (
     <footer className="relative border-t border-white/5 bg-graphite-950">
@@ -23,6 +23,7 @@ export default function Footer() {
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">
               {companyData.segment}. {address.district}, {address.city} – {address.state}.
             </p>
+            <p className="mt-3 text-sm text-gray-400">CNPJ: {cnpj}</p>
           </div>
 
           <div>
