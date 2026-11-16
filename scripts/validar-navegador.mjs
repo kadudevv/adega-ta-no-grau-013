@@ -37,6 +37,22 @@ try {
   assert.match(await page.locator('h1').innerText(), /Tá no Grau/);
   ok('Página carrega e exibe o título');
 
+  const navLogo = page.locator('nav img[src="/image.png"]');
+  assert.equal(await navLogo.count(), 1, 'A logo original deve continuar no menu');
+  assert.equal(await navLogo.evaluate(img => img.complete && img.naturalWidth > 0), true);
+  assert.equal(await navLogo.evaluate(img => getComputedStyle(img).objectFit), 'contain');
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const logoDimensions = await navLogo.boundingBox();
+  assert.ok(logoDimensions && logoDimensions.width >= 56, 'Logo do menu deve estar maior no desktop');
+  const watermark = page.locator('img.logo-watermark');
+  const watermarkPosition = await watermark.evaluate(img => ({
+    right: parseFloat(getComputedStyle(img).right),
+    sectionWidth: img.closest('section')?.getBoundingClientRect().width || 0,
+  }));
+  assert.ok(Math.abs(watermarkPosition.right + watermarkPosition.sectionWidth * 0.04) < 2, 'Logo do fundo deve estar deslocada para a esquerda (right: -4%)');
+  await page.setViewportSize({ width: 390, height: 844 });
+  ok('Logo maior e melhor contrastada; marca d’água reposicionada');
+
   const red = page.getByRole('link', { name: 'Pedir no iFood' });
   const ifood = await red.getAttribute('href');
   assert.ok(ifood?.startsWith('https://www.ifood.com.br/delivery/praia-grande-sp/adega-ta-no-grau-013-aviacao/'));
