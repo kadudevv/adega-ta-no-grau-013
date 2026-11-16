@@ -1,11 +1,13 @@
 import { MapPin, Navigation } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 import { companyData } from '@/data/company';
+import { usePrivacy } from '@/contexts/PrivacyContext';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export default function Location() {
   const { ref, isVisible } = useScrollAnimation();
   const { address, maps } = companyData;
+  const { choice, saveChoice } = usePrivacy();
 
   return (
     <section id="localizacao" className="section-padding bg-graphite-800/30 relative">
@@ -54,17 +56,21 @@ export default function Location() {
 
             <div className="lg:col-span-3">
               <div className="card-surface overflow-hidden h-full min-h-[320px] md:min-h-[400px]">
-                <iframe
-                  src={maps.embedUrl}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, minHeight: '320px' }}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  allowFullScreen
-                  title={`Mapa - ${companyData.name}`}
-                  className="w-full h-full"
-                />
+                {choice.allowGoogleMaps ? (
+                  <iframe src={maps.embedUrl} width="100%" height="100%" style={{ border: 0, minHeight: '320px' }}
+                    loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen
+                    title={`Mapa - ${companyData.name}`} className="w-full h-full" />
+                ) : (
+                  <div className="flex h-full min-h-[320px] flex-col items-center justify-center gap-5 p-8 text-center md:min-h-[400px]">
+                    <MapPin className="h-12 w-12 text-brand-400" aria-hidden="true" />
+                    <div>
+                      <h3 className="font-display text-xl font-semibold text-white">Confira nossa localização</h3>
+                      <p className="mt-2 text-sm text-gray-400">O mapa é fornecido pelo Google e só será carregado se você permitir.</p>
+                    </div>
+                    <button type="button" onClick={() => saveChoice(true)} className="btn-primary">Carregar mapa do Google</button>
+                    <a href={maps.directionsUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-300 underline hover:text-brand-400">Ou abrir rota diretamente no Google Maps</a>
+                  </div>
+                )}
               </div>
             </div>
           </div>

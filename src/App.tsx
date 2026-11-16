@@ -7,9 +7,12 @@ import Location from '@/components/Location';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
+import PrivacyCenter from '@/components/PrivacyCenter';
+import { PrivacyProvider } from '@/contexts/PrivacyContext';
 
 function App() {
   return (
+    <PrivacyProvider>
     <div className="min-h-screen bg-graphite-900 text-white">
       <Navbar />
       <main>
@@ -22,7 +25,9 @@ function App() {
       </main>
       <Footer />
       <WhatsAppFloat />
+      <PrivacyCenter />
     </div>
+    </PrivacyProvider>
   );
 }
 

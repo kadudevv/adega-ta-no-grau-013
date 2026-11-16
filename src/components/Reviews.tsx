@@ -1,4 +1,4 @@
-import { Star, BadgeCheck } from 'lucide-react';
+import { Star, BadgeCheck, ExternalLink } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 import { companyData } from '@/data/company';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -17,7 +17,7 @@ export default function Reviews() {
           <SectionHeading
             eyebrow="Avaliações"
             title="O que dizem sobre a Adega"
-            description="Dados fornecidos pelo responsável na criação do site. Não representam integração em tempo real com o Google."
+            description="Confira a avaliação da adega e consulte os comentários diretamente no Google Maps."
           />
 
           <div className="max-w-3xl mx-auto">
@@ -56,12 +56,15 @@ export default function Reviews() {
                     Fonte: {reviews.source}
                   </span>
                 </div>
+                <a href={companyData.maps.viewUrl} target="_blank" rel="noopener noreferrer" className="btn-primary mt-7">
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                  Ler avaliações no Google Maps
+                </a>
               </div>
             </div>
 
             <p className="mt-6 text-center text-sm text-gray-500 max-w-xl mx-auto">
-              Estes números podem ser atualizados a qualquer momento pelo
-              responsável da Adega Tá no Grau 013.
+              A nota e a quantidade acima são dados registrados manualmente, não atualizados em tempo real. Consulte a página do Google para informações atuais.
             </p>
           </div>
         </div>

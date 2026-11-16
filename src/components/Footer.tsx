@@ -1,7 +1,9 @@
 import { Wine, Phone, MapPin, AlertTriangle } from 'lucide-react';
 import { companyData } from '@/data/company';
+import { usePrivacy } from '@/contexts/PrivacyContext';
 
 export default function Footer() {
+  const { openPrivacy } = usePrivacy();
   const currentYear = new Date().getFullYear();
   const { address, phone, navLinks, legalNotice, name } = companyData;
 
@@ -77,9 +79,11 @@ export default function Footer() {
             <p className="text-sm text-gray-500">
               &copy; {currentYear} {name}. Todos os direitos reservados.
             </p>
-            <p className="text-xs text-gray-600">
-              Praia Grande – SP
-            </p>
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-gray-400">
+              <button type="button" onClick={() => openPrivacy('policy')} className="hover:text-brand-400 focus-visible:underline">Política de privacidade</button>
+              <button type="button" onClick={() => openPrivacy('cookies')} className="hover:text-brand-400 focus-visible:underline">Preferências de cookies</button>
+              <span>Praia Grande – SP</span>
+            </div>
           </div>
         </div>
       </div>
