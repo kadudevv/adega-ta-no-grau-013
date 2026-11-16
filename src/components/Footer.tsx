@@ -59,7 +59,7 @@ export default function Footer() {
               <li className="flex items-center gap-3 text-sm text-gray-400">
                 <Phone className="w-4 h-4 text-brand-400 flex-shrink-0" />
                 <a
-                  href={`tel:+${phone.raw}`}
+                  href={`tel:+55${phone.raw}`}
                   className="hover:text-brand-400 transition-colors"
                 >
                   {phone.display}
