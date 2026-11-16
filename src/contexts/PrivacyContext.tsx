@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 
 type PrivacyChoice = { decided: boolean; allowGoogleMaps: boolean };
-type PrivacyView = 'policy' | 'cookies' | null;
+type PrivacyView = 'policy' | 'cookies' | 'terms' | null;
 type ContextValue = {
   choice: PrivacyChoice;
   view: PrivacyView;

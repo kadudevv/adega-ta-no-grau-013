@@ -25,6 +25,15 @@ export default function Navbar() {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMenuOpen(false);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [isMenuOpen]);
+
   const handleNavClick = () => {
     setIsMenuOpen(false);
   };
@@ -48,12 +57,13 @@ export default function Navbar() {
             <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-graphite-950 border border-brand-400/30 group-hover:border-brand-400/70 transition-colors duration-300 overflow-hidden">
               <img src="/image.png" alt="" className="w-full h-full object-cover" />
             </div>
-            <span className="font-display font-bold text-base md:text-lg tracking-tight">
-              {companyData.name}
+            <span className="font-display font-bold text-sm sm:text-base md:text-lg tracking-tight whitespace-nowrap">
+              <span className="sm:hidden">{companyData.shortName}</span>
+              <span className="hidden sm:inline">{companyData.name}</span>
             </span>
           </a>
 
-          <ul className="hidden lg:flex items-center gap-1">
+          <ul className="hidden xl:flex items-center gap-1">
             {companyData.navLinks.map((link) => (
               <li key={link.href}>
                 <a
@@ -66,7 +76,7 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="hidden lg:block">
+          <div className="hidden xl:block">
             <a
               href={companyData.whatsapp.url}
               target="_blank"
@@ -78,7 +88,7 @@ export default function Navbar() {
           </div>
 
           <button
-            className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors"
+            className="xl:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
             aria-expanded={isMenuOpen}
@@ -91,7 +101,7 @@ export default function Navbar() {
 
       {isMenuOpen && (
         <div
-          className="fixed inset-0 z-40 lg:hidden bg-graphite-950/60 backdrop-blur-sm"
+          className="fixed inset-0 z-[41] xl:hidden bg-graphite-950/60 backdrop-blur-sm"
           onClick={() => setIsMenuOpen(false)}
           aria-hidden="true"
         />
@@ -100,7 +110,7 @@ export default function Navbar() {
       <div
         id="adega-mobile-menu"
         aria-hidden={!isMenuOpen}
-        className={`fixed top-0 right-0 bottom-0 z-40 lg:hidden w-[280px] max-w-[80vw] bg-graphite-800 border-l border-white/10 transition-transform duration-300 ease-out ${
+        className={`fixed top-0 right-0 bottom-0 z-[42] xl:hidden w-[280px] max-w-[80vw] bg-graphite-800 border-l border-white/10 transition-transform duration-300 ease-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >

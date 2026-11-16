@@ -47,9 +47,12 @@ try {
   assert.ok(wa?.startsWith('https://wa.me/5513996158547'));
   const maps = await page.getByRole('link', { name: 'Como chegar' }).getAttribute('href');
   assert.ok(maps?.startsWith('https://www.google.com/maps/dir/'));
-  assert.equal(await page.getByRole('link', { name: /telefone/i }).count(), 1);
-  ok('WhatsApp, GPS e telefone configurados');
+  const phoneLinks = await page.locator('a[href^="tel:"]').evaluateAll(links => links.map(link => link.getAttribute('href')));
+  assert.ok(phoneLinks.length >= 2, 'O telefone deve aparecer na seção contato e no rodapé');
+  assert.ok(phoneLinks.every(href => href === 'tel:+5513996158547'), 'Todos os links de telefone devem usar o DDI +55');
+  ok('WhatsApp, GPS e links de telefone com DDI brasileiro');
 
+  assert.equal(await page.getByRole('link', { name: 'Pular para o conteúdo' }).getAttribute('href'), '#conteudo-principal');
   const brokenIds = await page.locator('a[href^="#"]').evaluateAll(nodes => nodes.map(a => a.getAttribute('href')).filter(
     href => href && href.length > 1 && !document.getElementById(decodeURIComponent(href.substring(1)))
   ));
@@ -100,10 +103,18 @@ try {
   await page.keyboard.press('Escape');
   assert.equal(await dialog.count(), 0);
   ok('Política abre, prende foco no teclado e fecha com Escape');
+  await page.getByRole('button', { name: 'Termos de uso' }).click();
+  assert.ok((await page.getByRole('dialog').innerText()).includes('cancelamentos e reembolsos'));
+  await page.keyboard.press('Escape');
+  assert.equal(await page.getByRole('dialog').count(), 0);
+  ok('Termos de uso acessíveis e coerentes com pedidos no iFood');
 
   await page.getByRole('button', { name: 'Abrir menu' }).click();
   const drawer = page.locator('#adega-mobile-menu');
   assert.equal(await drawer.getAttribute('aria-hidden'), 'false');
+  const drawerLayer = await drawer.evaluate(el => Number(getComputedStyle(el).zIndex));
+  const floatLayer = await page.locator('a[aria-label="Falar no WhatsApp"]').evaluate(el => Number(getComputedStyle(el).zIndex));
+  assert.ok(drawerLayer > floatLayer, 'Menu móvel deve ficar acima do WhatsApp flutuante');
   await drawer.getByRole('link', { name: 'Produtos' }).click();
   assert.equal(await drawer.getAttribute('aria-hidden'), 'true');
   assert.equal(new URL(page.url()).hash, '#produtos');

@@ -63,7 +63,7 @@ export default function Reviews() {
               </div>
             </div>
 
-            <p className="mt-6 text-center text-sm text-gray-500 max-w-xl mx-auto">
+            <p className="mt-6 text-center text-sm text-gray-400 max-w-xl mx-auto">
               A nota e a quantidade acima são dados registrados manualmente, não atualizados em tempo real. Consulte a página do Google para informações atuais.
             </p>
           </div>

@@ -59,7 +59,7 @@ export default function Footer() {
               <li className="flex items-center gap-3 text-sm text-gray-400">
                 <Phone className="w-4 h-4 text-brand-400 flex-shrink-0" />
                 <a
-                  href={`tel:+${phone.raw}`}
+                  href={`tel:+55${phone.raw}`}
                   className="hover:text-brand-400 transition-colors"
                 >
                   {phone.display}
@@ -76,12 +76,13 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-400">
               &copy; {currentYear} {name}. Todos os direitos reservados.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-gray-400">
               <button type="button" onClick={() => openPrivacy('policy')} className="hover:text-brand-400 focus-visible:underline">Política de privacidade</button>
               <button type="button" onClick={() => openPrivacy('cookies')} className="hover:text-brand-400 focus-visible:underline">Preferências de cookies</button>
+              <button type="button" onClick={() => openPrivacy('terms')} className="hover:text-brand-400 focus-visible:underline">Termos de uso</button>
               <span>Praia Grande – SP</span>
             </div>
           </div>
