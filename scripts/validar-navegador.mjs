@@ -65,9 +65,13 @@ try {
   const reviewButtons = page.getByRole('link', { name: 'Avaliar no Google' });
   assert.equal(await reviewButtons.count(), 1);
   const reviewUrl = await reviewButtons.getAttribute('href');
-  assert.ok(reviewUrl?.startsWith('https://www.google.com/maps/place/Adega+T%C3%A1+no+Grau+013/'));
+  assert.ok(reviewUrl?.includes('!12e1'), 'Botão Avaliar deve usar a função Escrever avaliação do Google');
   assert.equal(await reviewButtons.getAttribute('target'), '_blank');
-  assert.equal(await page.getByRole('link', { name: 'Ver todas no Google' }).getAttribute('href'), reviewUrl);
+  const readReviewUrl = await page.getByRole('link', { name: 'Ver todas no Google' }).getAttribute('href');
+  assert.ok(readReviewUrl?.includes('!9m1!1b1'), 'Botão Ver todas deve usar a aba Avaliações do Google');
+  assert.notEqual(readReviewUrl, reviewUrl, 'Links de escrever e ler avaliações não podem ser iguais');
+  assert.ok(readReviewUrl?.includes('0x94ce1f005d18a55f:0x53299be2e9ce98cf'));
+  assert.ok(reviewUrl?.includes('0x94ce1f005d18a55f:0x53299be2e9ce98cf'));
   assert.equal(await page.locator('#avaliacoes li').count(), 0, 'Não publicar avaliações não verificadas');
   ok('Acesso à ficha da adega no Google e nenhum comentário fictício');
 
