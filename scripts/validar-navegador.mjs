@@ -72,8 +72,23 @@ try {
   assert.notEqual(readReviewUrl, reviewUrl, 'Links de escrever e ler avaliações não podem ser iguais');
   assert.ok(readReviewUrl?.includes('0x94ce1f005d18a55f:0x53299be2e9ce98cf'));
   assert.ok(reviewUrl?.includes('0x94ce1f005d18a55f:0x53299be2e9ce98cf'));
-  assert.equal(await page.locator('#avaliacoes li').count(), 0, 'Não publicar avaliações não verificadas');
-  ok('Acesso à ficha da adega no Google e nenhum comentário fictício');
+  const reviewCards = page.locator('#avaliacoes li');
+  assert.equal(await reviewCards.count(), 5, 'Exibir exatamente cinco avaliações reais');
+  const expectedReviews = [
+    ['Rayssa Silva dos santos dantas', 'Que adega ótima!'],
+    ['Erick Matos', 'Atendimento muito bom pessoas super educadas'],
+    ['Diégo Wendell Américo De Souza', 'Ótimo atendimento e produtos de qualidade'],
+    ['Geovane Oliveira', 'Lugar fácil acesso atendimento Toop indico'],
+    ['rosana vituri', 'Excelente ADEGA, sou cliente de todos os dias'],
+  ];
+  for (const [index, [name, excerpt]] of expectedReviews.entries()) {
+    const text = await reviewCards.nth(index).innerText();
+    assert.ok(text.includes(name), 'Nome correto na avaliação ' + (index + 1));
+    assert.ok(text.includes(excerpt), 'Trecho do comentário correto na avaliação ' + (index + 1));
+    assert.equal(await reviewCards.nth(index).locator('svg').count(), 5, 'Cinco estrelas na avaliação ' + (index + 1));
+  }
+  assert.equal(await page.getByText('Os depoimentos em destaque serão adicionados').count(), 0);
+  ok('Cinco avaliações reais publicadas nos cards e links do Google preservados');
 
   assert.equal(await page.getByRole('link', { name: 'Pular para o conteúdo' }).getAttribute('href'), '#conteudo-principal');
   const brokenIds = await page.locator('a[href^="#"]').evaluateAll(nodes => nodes.map(a => a.getAttribute('href')).filter(
